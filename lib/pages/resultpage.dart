@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:qizoproject/services/api_service.dart';
 
 class ResultPage extends StatelessWidget {
@@ -22,56 +21,45 @@ class ResultPage extends StatelessWidget {
               if (snapshot.hasData) {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
-                  itemBuilder: (context, index) => Card(
-                    elevation: 16,
+                  itemBuilder: (context, index) => Container(
                     child: Column(
                       children: [
-                        Image.network(
-                            snapshot.data![index].imageLink.toString()),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            snapshot.data![index].name.toString(),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 19),
-                          ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 207,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  snapshot.data![index].name!,
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: 65,
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(snapshot.data![index].brand!),
+                            ),
+                            Container(
+                              height: 65,
+                              color: Colors.black,
+                              width: 1,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Text(snapshot.data![index].price!),
+                            ),
+                          ],
                         ),
-                        Text(
-                          snapshot.data![index].brand.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.normal,
-                              fontSize: 16,
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          "₹${snapshot.data![index].price}",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 19,
-                          ),
-                        ),
-                        RatingBar.builder(
-                          initialRating: snapshot.data![index].rating == null
-                              ? 0.0
-                              : snapshot.data![index].rating!.toDouble(),
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(snapshot.data![index].description!),
-                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 1,
+                          color: Colors.black,
+                        )
                       ],
                     ),
                   ),
